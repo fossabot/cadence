@@ -685,7 +685,7 @@ func (entry *DomainCacheEntry) duplicate() *DomainCacheEntry {
 	}
 	result.config = &persistence.DomainConfig{
 		Retention:                entry.config.Retention,
-		EmitMetric:               entry.config.EmitMetric,
+		SkipMetric:               entry.config.SkipMetric,
 		HistoryArchivalStatus:    entry.config.HistoryArchivalStatus,
 		HistoryArchivalURI:       entry.config.HistoryArchivalURI,
 		VisibilityArchivalStatus: entry.config.VisibilityArchivalStatus,

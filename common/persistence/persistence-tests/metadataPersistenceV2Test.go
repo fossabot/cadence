@@ -96,7 +96,7 @@ func (m *MetadataPersistenceSuiteV2) TestCreateDomain() {
 	owner := "create-domain-test-owner"
 	data := map[string]string{"k1": "v1"}
 	retention := int32(10)
-	emitMetric := true
+	skipMetric := false
 	historyArchivalStatus := gen.ArchivalStatusEnabled
 	historyArchivalURI := "test://history/uri"
 	visibilityArchivalStatus := gen.ArchivalStatusEnabled
@@ -117,7 +117,7 @@ func (m *MetadataPersistenceSuiteV2) TestCreateDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                retention,
-			EmitMetric:               emitMetric,
+			SkipMetric:               skipMetric,
 			HistoryArchivalStatus:    historyArchivalStatus,
 			HistoryArchivalURI:       historyArchivalURI,
 			VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -145,7 +145,7 @@ func (m *MetadataPersistenceSuiteV2) TestCreateDomain() {
 	m.Equal(owner, resp1.Info.OwnerEmail)
 	m.Equal(data, resp1.Info.Data)
 	m.Equal(retention, resp1.Config.Retention)
-	m.Equal(emitMetric, resp1.Config.EmitMetric)
+	m.Equal(skipMetric, resp1.Config.SkipMetric)
 	m.Equal(historyArchivalStatus, resp1.Config.HistoryArchivalStatus)
 	m.Equal(historyArchivalURI, resp1.Config.HistoryArchivalURI)
 	m.Equal(visibilityArchivalStatus, resp1.Config.VisibilityArchivalStatus)
@@ -170,7 +170,7 @@ func (m *MetadataPersistenceSuiteV2) TestCreateDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                100,
-			EmitMetric:               false,
+			SkipMetric:               true,
 			HistoryArchivalStatus:    gen.ArchivalStatusDisabled,
 			HistoryArchivalURI:       "",
 			VisibilityArchivalStatus: gen.ArchivalStatusDisabled,
@@ -195,7 +195,7 @@ func (m *MetadataPersistenceSuiteV2) TestGetDomain() {
 	owner := "get-domain-test-owner"
 	data := map[string]string{"k1": "v1"}
 	retention := int32(10)
-	emitMetric := true
+	skipMetric := false
 	historyArchivalStatus := gen.ArchivalStatusEnabled
 	historyArchivalURI := "test://history/uri"
 	visibilityArchivalStatus := gen.ArchivalStatusEnabled
@@ -240,7 +240,7 @@ func (m *MetadataPersistenceSuiteV2) TestGetDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                retention,
-			EmitMetric:               emitMetric,
+			SkipMetric:               skipMetric,
 			HistoryArchivalStatus:    historyArchivalStatus,
 			HistoryArchivalURI:       historyArchivalURI,
 			VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -269,7 +269,7 @@ func (m *MetadataPersistenceSuiteV2) TestGetDomain() {
 	m.Equal(owner, resp2.Info.OwnerEmail)
 	m.Equal(data, resp2.Info.Data)
 	m.Equal(retention, resp2.Config.Retention)
-	m.Equal(emitMetric, resp2.Config.EmitMetric)
+	m.Equal(skipMetric, resp2.Config.SkipMetric)
 	m.Equal(historyArchivalStatus, resp2.Config.HistoryArchivalStatus)
 	m.Equal(historyArchivalURI, resp2.Config.HistoryArchivalURI)
 	m.Equal(visibilityArchivalStatus, resp2.Config.VisibilityArchivalStatus)
@@ -295,7 +295,7 @@ func (m *MetadataPersistenceSuiteV2) TestGetDomain() {
 	m.Equal(owner, resp3.Info.OwnerEmail)
 	m.Equal(data, resp3.Info.Data)
 	m.Equal(retention, resp3.Config.Retention)
-	m.Equal(emitMetric, resp3.Config.EmitMetric)
+	m.Equal(skipMetric, resp3.Config.SkipMetric)
 	m.Equal(historyArchivalStatus, resp3.Config.HistoryArchivalStatus)
 	m.Equal(historyArchivalURI, resp3.Config.HistoryArchivalURI)
 	m.Equal(visibilityArchivalStatus, resp3.Config.VisibilityArchivalStatus)
@@ -329,7 +329,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentCreateDomain() {
 	description := "concurrent-create-domain-test-description"
 	owner := "create-domain-test-owner"
 	retention := int32(10)
-	emitMetric := true
+	skipMetric := false
 	historyArchivalStatus := gen.ArchivalStatusEnabled
 	historyArchivalURI := "test://history/uri"
 	visibilityArchivalStatus := gen.ArchivalStatusEnabled
@@ -376,7 +376,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentCreateDomain() {
 				},
 				&p.DomainConfig{
 					Retention:                retention,
-					EmitMetric:               emitMetric,
+					SkipMetric:               skipMetric,
 					HistoryArchivalStatus:    historyArchivalStatus,
 					HistoryArchivalURI:       historyArchivalURI,
 					VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -408,7 +408,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentCreateDomain() {
 	m.Equal(description, resp.Info.Description)
 	m.Equal(owner, resp.Info.OwnerEmail)
 	m.Equal(retention, resp.Config.Retention)
-	m.Equal(emitMetric, resp.Config.EmitMetric)
+	m.Equal(skipMetric, resp.Config.SkipMetric)
 	m.Equal(historyArchivalStatus, resp.Config.HistoryArchivalStatus)
 	m.Equal(historyArchivalURI, resp.Config.HistoryArchivalURI)
 	m.Equal(visibilityArchivalStatus, resp.Config.VisibilityArchivalStatus)
@@ -440,7 +440,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentUpdateDomain() {
 	owner := "update-domain-test-owner"
 	data := map[string]string{"k1": "v1"}
 	retention := int32(10)
-	emitMetric := true
+	skipMetric := false
 	historyArchivalStatus := gen.ArchivalStatusEnabled
 	historyArchivalURI := "test://history/uri"
 	visibilityArchivalStatus := gen.ArchivalStatusEnabled
@@ -472,7 +472,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentUpdateDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                retention,
-			EmitMetric:               emitMetric,
+			SkipMetric:               skipMetric,
 			HistoryArchivalStatus:    historyArchivalStatus,
 			HistoryArchivalURI:       historyArchivalURI,
 			VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -524,7 +524,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentUpdateDomain() {
 				},
 				&p.DomainConfig{
 					Retention:                resp2.Config.Retention,
-					EmitMetric:               resp2.Config.EmitMetric,
+					SkipMetric:               resp2.Config.SkipMetric,
 					HistoryArchivalStatus:    resp2.Config.HistoryArchivalStatus,
 					HistoryArchivalURI:       resp2.Config.HistoryArchivalURI,
 					VisibilityArchivalStatus: resp2.Config.VisibilityArchivalStatus,
@@ -560,7 +560,7 @@ func (m *MetadataPersistenceSuiteV2) TestConcurrentUpdateDomain() {
 	m.Equal(owner, resp3.Info.OwnerEmail)
 
 	m.Equal(retention, resp3.Config.Retention)
-	m.Equal(emitMetric, resp3.Config.EmitMetric)
+	m.Equal(skipMetric, resp3.Config.SkipMetric)
 	m.Equal(historyArchivalStatus, resp3.Config.HistoryArchivalStatus)
 	m.Equal(historyArchivalURI, resp3.Config.HistoryArchivalURI)
 	m.Equal(visibilityArchivalStatus, resp3.Config.VisibilityArchivalStatus)
@@ -592,7 +592,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateDomain() {
 	owner := "update-domain-test-owner"
 	data := map[string]string{"k1": "v1"}
 	retention := int32(10)
-	emitMetric := true
+	skipMetric := false
 	historyArchivalStatus := gen.ArchivalStatusEnabled
 	historyArchivalURI := "test://history/uri"
 	visibilityArchivalStatus := gen.ArchivalStatusEnabled
@@ -623,7 +623,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                retention,
-			EmitMetric:               emitMetric,
+			SkipMetric:               skipMetric,
 			HistoryArchivalStatus:    historyArchivalStatus,
 			HistoryArchivalURI:       historyArchivalURI,
 			VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -652,7 +652,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateDomain() {
 	//This will overriding the previous key-value pair
 	updatedData := map[string]string{"k1": "v2"}
 	updatedRetention := int32(20)
-	updatedEmitMetric := false
+	updatedSkipMetric := true
 	updatedHistoryArchivalStatus := gen.ArchivalStatusDisabled
 	updatedHistoryArchivalURI := ""
 	updatedVisibilityArchivalStatus := gen.ArchivalStatusDisabled
@@ -692,7 +692,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                updatedRetention,
-			EmitMetric:               updatedEmitMetric,
+			SkipMetric:               updatedSkipMetric,
 			HistoryArchivalStatus:    updatedHistoryArchivalStatus,
 			HistoryArchivalURI:       updatedHistoryArchivalURI,
 			VisibilityArchivalStatus: updatedVisibilityArchivalStatus,
@@ -721,7 +721,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateDomain() {
 	m.Equal(updatedOwner, resp4.Info.OwnerEmail)
 	m.Equal(updatedData, resp4.Info.Data)
 	m.Equal(updatedRetention, resp4.Config.Retention)
-	m.Equal(updatedEmitMetric, resp4.Config.EmitMetric)
+	m.Equal(updatedSkipMetric, resp4.Config.SkipMetric)
 	m.Equal(updatedHistoryArchivalStatus, resp4.Config.HistoryArchivalStatus)
 	m.Equal(updatedHistoryArchivalURI, resp4.Config.HistoryArchivalURI)
 	m.Equal(updatedVisibilityArchivalStatus, resp4.Config.VisibilityArchivalStatus)
@@ -748,7 +748,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateDomain() {
 	m.Equal(updatedOwner, resp5.Info.OwnerEmail)
 	m.Equal(updatedData, resp5.Info.Data)
 	m.Equal(updatedRetention, resp5.Config.Retention)
-	m.Equal(updatedEmitMetric, resp5.Config.EmitMetric)
+	m.Equal(updatedSkipMetric, resp5.Config.SkipMetric)
 	m.Equal(updatedHistoryArchivalStatus, resp5.Config.HistoryArchivalStatus)
 	m.Equal(updatedHistoryArchivalURI, resp5.Config.HistoryArchivalURI)
 	m.Equal(updatedVisibilityArchivalStatus, resp5.Config.VisibilityArchivalStatus)
@@ -773,7 +773,7 @@ func (m *MetadataPersistenceSuiteV2) TestDeleteDomain() {
 	owner := "delete-domain-test-owner"
 	data := map[string]string{"k1": "v1"}
 	retention := 10
-	emitMetric := true
+	skipMetric := false
 	historyArchivalStatus := gen.ArchivalStatusEnabled
 	historyArchivalURI := "test://history/uri"
 	visibilityArchivalStatus := gen.ArchivalStatusEnabled
@@ -804,7 +804,7 @@ func (m *MetadataPersistenceSuiteV2) TestDeleteDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                int32(retention),
-			EmitMetric:               emitMetric,
+			SkipMetric:               skipMetric,
 			HistoryArchivalStatus:    historyArchivalStatus,
 			HistoryArchivalURI:       historyArchivalURI,
 			VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -850,7 +850,7 @@ func (m *MetadataPersistenceSuiteV2) TestDeleteDomain() {
 		},
 		&p.DomainConfig{
 			Retention:                int32(retention),
-			EmitMetric:               emitMetric,
+			SkipMetric:               skipMetric,
 			HistoryArchivalStatus:    historyArchivalStatus,
 			HistoryArchivalURI:       historyArchivalURI,
 			VisibilityArchivalStatus: visibilityArchivalStatus,
@@ -936,7 +936,7 @@ func (m *MetadataPersistenceSuiteV2) TestListDomains() {
 			},
 			Config: &p.DomainConfig{
 				Retention:                109,
-				EmitMetric:               true,
+				SkipMetric:               false,
 				HistoryArchivalStatus:    gen.ArchivalStatusEnabled,
 				HistoryArchivalURI:       "test://history/uri",
 				VisibilityArchivalStatus: gen.ArchivalStatusEnabled,
@@ -962,7 +962,7 @@ func (m *MetadataPersistenceSuiteV2) TestListDomains() {
 			},
 			Config: &p.DomainConfig{
 				Retention:                326,
-				EmitMetric:               false,
+				SkipMetric:               true,
 				HistoryArchivalStatus:    gen.ArchivalStatusDisabled,
 				HistoryArchivalURI:       "",
 				VisibilityArchivalStatus: gen.ArchivalStatusDisabled,

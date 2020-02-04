@@ -1125,7 +1125,7 @@ type (
 	DomainConfig struct {
 		// NOTE: this retention is in days, not in seconds
 		Retention                int32
-		EmitMetric               bool
+		SkipMetric               bool
 		HistoryArchivalStatus    workflow.ArchivalStatus
 		HistoryArchivalURI       string
 		VisibilityArchivalStatus workflow.ArchivalStatus

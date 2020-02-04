@@ -107,7 +107,7 @@ func (domainReplicator *domainReplicatorImpl) handleDomainCreationReplicationTas
 		},
 		Config: &persistence.DomainConfig{
 			Retention:                task.Config.GetWorkflowExecutionRetentionPeriodInDays(),
-			EmitMetric:               task.Config.GetEmitMetric(),
+			SkipMetric:               task.Config.GetSkipMetric(),
 			HistoryArchivalStatus:    task.Config.GetHistoryArchivalStatus(),
 			HistoryArchivalURI:       task.Config.GetHistoryArchivalURI(),
 			VisibilityArchivalStatus: task.Config.GetVisibilityArchivalStatus(),
@@ -223,7 +223,7 @@ func (domainReplicator *domainReplicatorImpl) handleDomainUpdateReplicationTask(
 		}
 		request.Config = &persistence.DomainConfig{
 			Retention:                task.Config.GetWorkflowExecutionRetentionPeriodInDays(),
-			EmitMetric:               task.Config.GetEmitMetric(),
+			SkipMetric:               task.Config.GetSkipMetric(),
 			HistoryArchivalStatus:    task.Config.GetHistoryArchivalStatus(),
 			HistoryArchivalURI:       task.Config.GetHistoryArchivalURI(),
 			VisibilityArchivalStatus: task.Config.GetVisibilityArchivalStatus(),

@@ -79,12 +79,12 @@ func (d *domainCLIImpl) RegisterDomain(c *cli.Context) {
 		retentionDays = c.Int(FlagRetentionDays)
 	}
 	securityToken := c.String(FlagSecurityToken)
-	emitMetric := false
+	skipMetric := true
 	var err error
-	if c.IsSet(FlagEmitMetric) {
-		emitMetric, err = strconv.ParseBool(c.String(FlagEmitMetric))
+	if c.IsSet(FlagSkipMetric) {
+		skipMetric, err = strconv.ParseBool(c.String(FlagSkipMetric))
 		if err != nil {
-			ErrorAndExit(fmt.Sprintf("Option %s format is invalid.", FlagEmitMetric), err)
+			ErrorAndExit(fmt.Sprintf("Option %s format is invalid.", FlagSkipMetric), err)
 		}
 	}
 	var isGlobalDomainPtr *bool
@@ -135,7 +135,7 @@ func (d *domainCLIImpl) RegisterDomain(c *cli.Context) {
 		OwnerEmail:                             common.StringPtr(ownerEmail),
 		Data:                                   domainData,
 		WorkflowExecutionRetentionPeriodInDays: common.Int32Ptr(int32(retentionDays)),
-		EmitMetric:                             common.BoolPtr(emitMetric),
+		SkipMetric:                             common.BoolPtr(skipMetric),
 		Clusters:                               clusters,
 		ActiveClusterName:                      activeClusterName,
 		SecurityToken:                          common.StringPtr(securityToken),
@@ -194,7 +194,7 @@ func (d *domainCLIImpl) UpdateDomain(c *cli.Context) {
 		description := resp.DomainInfo.GetDescription()
 		ownerEmail := resp.DomainInfo.GetOwnerEmail()
 		retentionDays := resp.Configuration.GetWorkflowExecutionRetentionPeriodInDays()
-		emitMetric := resp.Configuration.GetEmitMetric()
+		skipMetric := resp.Configuration.GetSkipMetric()
 		var clusters []*shared.ClusterReplicationConfiguration
 
 		if c.IsSet(FlagDescription) {
@@ -214,10 +214,10 @@ func (d *domainCLIImpl) UpdateDomain(c *cli.Context) {
 		if c.IsSet(FlagRetentionDays) {
 			retentionDays = int32(c.Int(FlagRetentionDays))
 		}
-		if c.IsSet(FlagEmitMetric) {
-			emitMetric, err = strconv.ParseBool(c.String(FlagEmitMetric))
+		if c.IsSet(FlagSkipMetric) {
+			skipMetric, err = strconv.ParseBool(c.String(FlagSkipMetric))
 			if err != nil {
-				ErrorAndExit(fmt.Sprintf("Option %s format is invalid.", FlagEmitMetric), err)
+				ErrorAndExit(fmt.Sprintf("Option %s format is invalid.", FlagSkipMetric), err)
 			}
 		}
 		if c.IsSet(FlagClusters) {
@@ -262,7 +262,7 @@ func (d *domainCLIImpl) UpdateDomain(c *cli.Context) {
 		}
 		updateConfig := &shared.DomainConfiguration{
 			WorkflowExecutionRetentionPeriodInDays: common.Int32Ptr(int32(retentionDays)),
-			EmitMetric:                             common.BoolPtr(emitMetric),
+			SkipMetric:                             common.BoolPtr(skipMetric),
 			HistoryArchivalStatus:                  archivalStatus(c, FlagHistoryArchivalStatus),
 			HistoryArchivalURI:                     common.StringPtr(c.String(FlagHistoryArchivalURI)),
 			VisibilityArchivalStatus:               archivalStatus(c, FlagVisibilityArchivalStatus),
@@ -317,7 +317,7 @@ func (d *domainCLIImpl) DescribeDomain(c *cli.Context) {
 	}
 
 	var formatStr = "Name: %v\nUUID: %v\nDescription: %v\nOwnerEmail: %v\nDomainData: %v\nStatus: %v\nRetentionInDays: %v\n" +
-		"EmitMetrics: %v\nActiveClusterName: %v\nClusters: %v\nHistoryArchivalStatus: %v\n"
+		"SkipMetrics: %v\nActiveClusterName: %v\nClusters: %v\nHistoryArchivalStatus: %v\n"
 	descValues := []interface{}{
 		resp.DomainInfo.GetName(),
 		resp.DomainInfo.GetUUID(),
@@ -326,7 +326,7 @@ func (d *domainCLIImpl) DescribeDomain(c *cli.Context) {
 		resp.DomainInfo.Data,
 		resp.DomainInfo.GetStatus(),
 		resp.Configuration.GetWorkflowExecutionRetentionPeriodInDays(),
-		resp.Configuration.GetEmitMetric(),
+		resp.Configuration.GetSkipMetric(),
 		resp.ReplicationConfiguration.GetActiveClusterName(),
 		clustersToString(resp.ReplicationConfiguration.Clusters),
 		resp.Configuration.GetHistoryArchivalStatus().String(),

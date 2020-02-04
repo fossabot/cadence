@@ -316,7 +316,7 @@ func (s *Service) registerSystemDomain() {
 		},
 		Config: &persistence.DomainConfig{
 			Retention:  common.SystemDomainRetentionDays,
-			EmitMetric: true,
+			SkipMetric: false,
 		},
 		ReplicationConfig: &persistence.DomainReplicationConfig{
 			ActiveClusterName: currentClusterName,

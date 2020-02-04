@@ -62,7 +62,7 @@ var (
 			Usage: "Workflow execution retention in days",
 		},
 		cli.StringFlag{
-			Name:  FlagEmitMetricWithAlias,
+			Name:  FlagSkipMetricWithAlias,
 			Usage: "Flag to emit metric",
 		},
 		cli.StringFlag{
@@ -120,7 +120,7 @@ var (
 			Usage: "Workflow execution retention in days",
 		},
 		cli.StringFlag{
-			Name:  FlagEmitMetricWithAlias,
+			Name:  FlagSkipMetricWithAlias,
 			Usage: "Flag to emit metric",
 		},
 		cli.StringFlag{

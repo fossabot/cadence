@@ -154,7 +154,7 @@ func (m *metadataManagerImpl) serializeDomainConfig(c *DomainConfig) (InternalDo
 	}
 	return InternalDomainConfig{
 		Retention:                c.Retention,
-		EmitMetric:               c.EmitMetric,
+		SkipMetric:               c.SkipMetric,
 		HistoryArchivalStatus:    c.HistoryArchivalStatus,
 		HistoryArchivalURI:       c.HistoryArchivalURI,
 		VisibilityArchivalStatus: c.VisibilityArchivalStatus,
@@ -176,7 +176,7 @@ func (m *metadataManagerImpl) deserializeDomainConfig(ic *InternalDomainConfig) 
 	}
 	return DomainConfig{
 		Retention:                ic.Retention,
-		EmitMetric:               ic.EmitMetric,
+		SkipMetric:               ic.SkipMetric,
 		HistoryArchivalStatus:    ic.HistoryArchivalStatus,
 		HistoryArchivalURI:       ic.HistoryArchivalURI,
 		VisibilityArchivalStatus: ic.VisibilityArchivalStatus,

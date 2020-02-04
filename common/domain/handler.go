@@ -201,7 +201,7 @@ func (d *HandlerImpl) RegisterDomain(
 	}
 	config := &persistence.DomainConfig{
 		Retention:                registerRequest.GetWorkflowExecutionRetentionPeriodInDays(),
-		EmitMetric:               registerRequest.GetEmitMetric(),
+		SkipMetric:               registerRequest.GetSkipMetric(),
 		HistoryArchivalStatus:    nextHistoryArchivalState.Status,
 		HistoryArchivalURI:       nextHistoryArchivalState.URI,
 		VisibilityArchivalStatus: nextVisibilityArchivalState.Status,
@@ -424,9 +424,9 @@ func (d *HandlerImpl) UpdateDomain(
 	}
 	if updateRequest.Configuration != nil {
 		updatedConfig := updateRequest.Configuration
-		if updatedConfig.EmitMetric != nil {
+		if updatedConfig.SkipMetric != nil {
 			configurationChanged = true
-			config.EmitMetric = updatedConfig.GetEmitMetric()
+			config.SkipMetric = updatedConfig.GetSkipMetric()
 		}
 		if updatedConfig.WorkflowExecutionRetentionPeriodInDays != nil {
 			configurationChanged = true
@@ -629,7 +629,7 @@ func (d *HandlerImpl) createResponse(
 	}
 
 	configResult := &shared.DomainConfiguration{
-		EmitMetric:                             common.BoolPtr(config.EmitMetric),
+		SkipMetric:                             common.BoolPtr(config.SkipMetric),
 		WorkflowExecutionRetentionPeriodInDays: common.Int32Ptr(config.Retention),
 		HistoryArchivalStatus:                  common.ArchivalStatusPtr(config.HistoryArchivalStatus),
 		HistoryArchivalURI:                     common.StringPtr(config.HistoryArchivalURI),

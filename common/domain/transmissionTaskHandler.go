@@ -89,7 +89,7 @@ func (domainReplicator *domainReplicatorImpl) HandleTransmissionTask(domainOpera
 		},
 		Config: &shared.DomainConfiguration{
 			WorkflowExecutionRetentionPeriodInDays: common.Int32Ptr(config.Retention),
-			EmitMetric:                             common.BoolPtr(config.EmitMetric),
+			SkipMetric:                             common.BoolPtr(config.SkipMetric),
 			HistoryArchivalStatus:                  common.ArchivalStatusPtr(config.HistoryArchivalStatus),
 			HistoryArchivalURI:                     common.StringPtr(config.HistoryArchivalURI),
 			VisibilityArchivalStatus:               common.ArchivalStatusPtr(config.VisibilityArchivalStatus),

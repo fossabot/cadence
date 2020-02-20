@@ -1,5 +1,6 @@
 # Cadence  
-[![Build Status](https://badge.buildkite.com/159887afd42000f11126f85237317d4090de97b26c287ebc40.svg?theme=github&branch=master)](https://buildkite.com/uberopensource/cadence-server) 
+[![Build Status](https://badge.buildkite.com/159887afd42000f11126f85237317d4090de97b26c287ebc40.svg?theme=github&branch=master)](https://buildkite.com/uberopensource/cadence-server) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fuber%2Fcadence.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fuber%2Fcadence?ref=badge_shield)
+
 [![Coverage Status](https://coveralls.io/repos/github/uber/cadence/badge.svg)](https://coveralls.io/github/uber/cadence)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://app.slack.com/team/UFQ98VD0T)
 
@@ -37,3 +38,6 @@ If you'd like to propose a new feature, first join the Cadence [discussion group
 ## License
 
 MIT License, please see [LICENSE](https://github.com/uber/cadence/blob/master/LICENSE) for details.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fuber%2Fcadence.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fuber%2Fcadence?ref=badge_large)
